@@ -2,26 +2,35 @@ namespace PicrossSolver;
 
 public class PicrossSolver
 {
-    private readonly PicrossRepository _picrossRepository;
+    public Picross _picross;
 
-    public PicrossSolver(PicrossRepository picrossRepository)
+    public PicrossSolver(Picross picross)
     {
-        _picrossRepository = picrossRepository;
+        _picross = picross;
     }
 
-    public void DisplayPicrossFromFile(string filename)
+    public void Solve()
     {
-        var picross = _picrossRepository.GetPicrossFromFile(filename);
-        picross.InitBoardArray(); // have to do this for now
-        PicrossDisplay.DisplayPicross(picross);
-        Console.WriteLine("DONE");
+        HandleMaxSizeHints();
+        // handle next solvable cases
+        // iteration until solved
     }
 
-    public static int Main()
+    public void HandleMaxSizeHints()
     {
-        PicrossRepository picrossRepository = new PicrossRepository();
-        PicrossSolver solver = new PicrossSolver(picrossRepository);
-        solver.DisplayPicrossFromFile("puzzle1.json");
-        return 1;
+        int WIDTH = _picross.GetWidth();
+        int HEIGHT = _picross.GetHeight();
+
+        // this will get us an answer to IF this case exists
+        // but not the column where it does exist
+        var HorizontalHints = _picross.Horizontal.SelectMany(x => x.Value)
+                                                 .Select(x => x)
+                                                 .Where(y => (y == HEIGHT) || (y == 0));
+
+        var hints = _picross.Horizontal.SelectMany(x => x.Value);
+        // - get all values (List<int>)
+        // - if any List<int> contains 0 or HEIGHT then
+        // - return that List<int>
+        // - _picross.Horizontal.ContainsValue(each of those List<int>) and get key from there
     }
 }

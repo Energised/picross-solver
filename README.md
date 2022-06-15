@@ -8,3 +8,11 @@
     - 5x5
     - 10x15
     - 20x20
+
+
+## Notes to Self
+
+Handling the Dictionary flattening is easy if I want to just check for the existence of a value
+
+When I need to find what Key that value is living at, then it becomes harder
+
