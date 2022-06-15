@@ -9,6 +9,6 @@ public class PicrossRepository
         string path = $"data/{filename}";
         string picrossJson = File.ReadAllText(path) ?? "";
         Picross? picross = JsonSerializer.Deserialize<Picross>(picrossJson); // ?? new Picross("JSON Deserialise failed");
-        return picross;
+        return picross ??= new Picross();
     }
 }

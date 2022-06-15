@@ -2,7 +2,6 @@ namespace PicrossSolver;
 
 public class PicrossSolver
 {
-
     private readonly PicrossRepository _picrossRepository;
 
     public PicrossSolver(PicrossRepository picrossRepository)
@@ -12,8 +11,10 @@ public class PicrossSolver
 
     public void DisplayPicrossFromFile(string filename)
     {
-        Picross? picross = _picrossRepository.GetPicrossFromFile(filename);
-        Console.Write("DONE");
+        var picross = _picrossRepository.GetPicrossFromFile(filename);
+        picross.InitBoardArray(); // have to do this for now
+        PicrossDisplay.DisplayPicross(picross);
+        Console.WriteLine("DONE");
     }
 
     public static int Main()
