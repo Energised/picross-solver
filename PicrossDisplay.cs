@@ -13,29 +13,28 @@ public static class PicrossDisplay
 
     public static string[,] GeneratePicrossDisplayBoard(Picross picross)
     {
-        var LongestHorizontalHint = picross.GetLongestHorizontalHint();
-        var LongestVerticalHint = picross.GetLongestVertialHint();
+        var LongestColumnsHint = picross.GetLongestColumnsHint();
+        var LongestRowsHint = picross.GetLongestRowsHint();
 
-        int LENGTH = LongestVerticalHint + HintBoardSpacerLength + picross.GetWidth();
-        int HEIGHT = LongestHorizontalHint + HintBoardSpacerLength + picross.GetHeight();
+        int LENGTH = LongestRowsHint + HintBoardSpacerLength + picross.GetLength();
+        int HEIGHT = LongestColumnsHint + HintBoardSpacerLength + picross.GetHeight();
 
         // offsets are not indexes, they just define how many spaces there are between
         // use these as part of a sum to get the index
         // BUT - coincidentally these are the board starting indexes
-        int INITIAL_X_INDEX_OFFSET = LongestVerticalHint + HintBoardSpacerLength;
-        int INITIAL_Y_INDEX_OFFSET = LongestHorizontalHint + HintBoardSpacerLength;
+        int INITIAL_X_INDEX_OFFSET = LongestRowsHint + HintBoardSpacerLength;
+        int INITIAL_Y_INDEX_OFFSET = LongestColumnsHint + HintBoardSpacerLength;
 
         string[,] DisplayBoard = new string[LENGTH, HEIGHT];
 
-        // Add Horizontal Hints to the DisplayBoard
+        // Add Column Hints to the DisplayBoard
 
-        foreach(var hint in picross.Horizontal)
+        foreach(var hint in picross.Rows)
         {
             var HeightValueIndex = 0;
             foreach(var hintValue in hint.Value)
             {
-                // The key starts from 1 so -1, then add the x offset
-                var XPosition = Int32.Parse(hint.Key) - 1 + INITIAL_X_INDEX_OFFSET;
+                var XPosition = Int32.Parse(hint.Key) + INITIAL_X_INDEX_OFFSET;
                 DisplayBoard[XPosition, HeightValueIndex] = hintValue.ToString();
                 HeightValueIndex++;
             }
@@ -43,12 +42,12 @@ public static class PicrossDisplay
 
         // Add Vertical Hints to the DisplayBoard
 
-        foreach(var hint in picross.Vertical)
+        foreach(var hint in picross.Columns)
         {
             var WidthValueIndex = 0;
             foreach(var hintValue in hint.Value)
             {
-                var YPosition = Int32.Parse(hint.Key) - 1 + INITIAL_Y_INDEX_OFFSET;
+                var YPosition = Int32.Parse(hint.Key) + INITIAL_Y_INDEX_OFFSET;
                 DisplayBoard[WidthValueIndex, YPosition] = hintValue.ToString();
                 WidthValueIndex++;
             }
@@ -66,7 +65,9 @@ public static class PicrossDisplay
             DisplayBoard[spacerIndex, 3] = "|";
         }
 
-        // TODO: Add Rest of Board
+        // Add Rest of Board
+        // TODO: Rewrite this, and check that BoardArray is how I want it, becasue x and y don't
+        // line up correctly, still seem to be addressing the wrong row/column in BoardArray
 
         int BOARD_X_INDEX = 0;
 
@@ -75,7 +76,7 @@ public static class PicrossDisplay
             int BOARD_Y_INDEX = 0;
             for(int y = INITIAL_Y_INDEX_OFFSET; y < HEIGHT; y++)
             {
-                DisplayBoard[x,y] = picross.BoardArray[BOARD_X_INDEX][BOARD_Y_INDEX];
+                DisplayBoard[y,x] = picross.BoardArray[BOARD_X_INDEX][BOARD_Y_INDEX];
                 BOARD_Y_INDEX++;
             }
             BOARD_X_INDEX++;

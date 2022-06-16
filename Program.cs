@@ -15,8 +15,10 @@ public class Program
     {
         PicrossRepository picrossRepository = new PicrossRepository();
         Picross picross = picrossRepository.GetPicrossFromFile("puzzle1.json");
+        picross.InitBoardArray();
         PicrossSolver solver = new PicrossSolver(picross);
         solver.Solve();
-        DisplayPicrossFromFile("puzzle1.json");
+        PicrossDisplay.DisplayPicross(solver._picross);
+        //DisplayPicrossFromFile("puzzle1.json");
     }
 }
