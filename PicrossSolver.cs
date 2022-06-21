@@ -30,7 +30,8 @@ public class PicrossSolver
                 Console.WriteLine($"MATCH FOUND AT COLUMN INDEX ${i}");
                 for(int pos = 0; pos < HEIGHT; pos++)
                 {
-                    _picross.BoardArray[i][pos] = "O";
+                    // we want it at row pos, where i is the column we need to fill
+                    _picross.BoardArray[pos][i] = "O";
                 }
             }
         }
@@ -41,22 +42,10 @@ public class PicrossSolver
             {
                 for(int pos = 0; pos < LENGTH; pos++)
                 {
-                    _picross.BoardArray[pos][j] = "O";
+                    _picross.BoardArray[j][pos] = "O";
                 }
             }
         }
-
-        // this will get us an answer to IF this case exists
-        // but not the column where it does exist
-        //var HorizontalHints = _picross.Horizontal.SelectMany(x => x.Value)
-                                                 //.Select(x => x)
-                                                 //.Where(y => (y == HEIGHT) || (y == 0));
-
-        //var hints = _picross.Horizontal.SelectMany(x => x.Value);
-        // - get all values (List<int>)
-        // - if any List<int> contains 0 or HEIGHT then
-        // - return that List<int>
-        // - _picross.Horizontal.ContainsValue(each of those List<int>) and get key from there
     }
 
     public void GetAllHints()

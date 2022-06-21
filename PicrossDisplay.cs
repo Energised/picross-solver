@@ -66,8 +66,6 @@ public static class PicrossDisplay
         }
 
         // Add Rest of Board
-        // TODO: Rewrite this, and check that BoardArray is how I want it, becasue x and y don't
-        // line up correctly, still seem to be addressing the wrong row/column in BoardArray
 
         int BOARD_X_INDEX = 0;
 
@@ -76,7 +74,7 @@ public static class PicrossDisplay
             int BOARD_Y_INDEX = 0;
             for(int y = INITIAL_Y_INDEX_OFFSET; y < HEIGHT; y++)
             {
-                DisplayBoard[y,x] = picross.BoardArray[BOARD_X_INDEX][BOARD_Y_INDEX];
+                DisplayBoard[x,y] = picross.BoardArray[BOARD_X_INDEX][BOARD_Y_INDEX];
                 BOARD_Y_INDEX++;
             }
             BOARD_X_INDEX++;

@@ -2,7 +2,7 @@ namespace PicrossSolver;
 
 public class Picross
 {
-    public List<int> Size {get; set;} // SIZE[0] = Horizontal, SIZE[1] = VERTICAL
+    public List<int> Size {get; set;} // SIZE[0] = ColumnSize/Length , SIZE[1] = RowSize/Height
     public Dictionary<string, List<int>> Columns {get; set;}
     public Dictionary<string, List<int>> Rows {get; set;}
     // TODO: Write a custom deserialiser to convert the list of lists to an array rather than doing it manually
@@ -25,15 +25,14 @@ public class Picross
         return this.Size[1];
     }
 
-    public int GetLongestRowsHint()
-    {
-        var allHints = this.Rows.Select(x => x.Value.Count);
-        return allHints.Max();
-    }
-
     public int GetLongestColumnsHint()
     {
         return this.Columns.Select(x => x.Value.Count).Max();
+    }
+
+    public int GetLongestRowsHint()
+    {
+        return this.Rows.Select(x => x.Value.Count).Max();
     }
 
     public void InitBoardArray()
@@ -60,16 +59,12 @@ public class Picross
         return RowPositionHints;
     }
 
-    // public void PrintPicrossToConsole()
-    // {
-    //     // TODO: Display board with horizontal and verticals displaying
-    //     // This will get me a better idea on iterating through their values
-    //     // and will be used for debugging
-    // }
+    public int InsertIntoBoardArray(int row, int column, string token)
+    {
+        if(this.BoardArray[row][column].Contains("O") || this.BoardArray[row][column].Contains("X")){
+            return 0;
+        }
+        this.BoardArray[row][column] = token;
+        return 1;
+    }
 }
-
-// public class PicrossHeader
-// {
-//     public string? Index {get; set;}
-//     public int? OrderedValues {get; set;}
-// }
