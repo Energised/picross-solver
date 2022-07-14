@@ -45,6 +45,8 @@ public class Picross
     // Can access the board with indexes from 0, and let this automatically get the correct one
     // By adding 1 to the array index, to match the columns in the JSON
     // OR: I could just have the JSON index from 0 also
+
+    #region GetHints
     public List<int> GetColumnHintsFromBoardArray(int column)
     {
         var HintPosition = column.ToString();
@@ -58,6 +60,18 @@ public class Picross
         var RowPositionHints = Rows.GetValueOrDefault(HintPosition) ?? new List<int>();
         return RowPositionHints;
     }
+
+    public bool IsHintAtColumnPositionAGivenValue(int position, int value)
+    {
+        return this.GetColumnHintsFromBoardArray(position).Exists(x => x == value); 
+    }
+
+    public bool IsHintAtRowPositionAGivenValue(int position, int value)
+    {
+        return this.GetRowHintsFromBoardArray(position).Exists(x => x == value);
+    }
+
+    #endregion
 
     public int InsertIntoBoardArray(int row, int column, string token)
     {

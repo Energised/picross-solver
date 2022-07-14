@@ -3,7 +3,7 @@ namespace PicrossSolver;
 public static class PicrossDisplay
 {
 
-    public static int HintBoardSpacerLength = 1;
+    public static int HintBoardSpacerLength = 2;
 
     public static void DisplayPicross(Picross picross)
     {
@@ -13,6 +13,8 @@ public static class PicrossDisplay
 
     public static string[,] GeneratePicrossDisplayBoard(Picross picross)
     {
+        // TODO: Instead we want to get the number of characters in a hint
+        //       This way we can account for values with 2 digits (e.g. 10)
         var LongestColumnsHint = picross.GetLongestColumnsHint();
         var LongestRowsHint = picross.GetLongestRowsHint();
 

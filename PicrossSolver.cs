@@ -12,6 +12,7 @@ public class PicrossSolver
     public void Solve()
     {
         HandleMaxSizeHints();
+        HandleHintSumCase();
         // handle next solvable cases
         // iteration until solved
 
@@ -25,7 +26,9 @@ public class PicrossSolver
 
         for(int i = 0; i < LENGTH; i++)
         {
-            if(_picross.GetColumnHintsFromBoardArray(i).Exists(x => x == 0 || x == 10))
+            // TODO: need to use these helper methods to decide which character to put on screen
+            // if(_picross.GetColumnHintsFromBoardArray(i).Exists(x => x == 0 || x == _picross.Size[0]))
+            if(_picross.IsHintAtColumnPositionAGivenValue(i, 0) || _picross.IsHintAtColumnPositionAGivenValue(i, _picross.Size[0]))
             {
                 Console.WriteLine($"MATCH FOUND AT COLUMN INDEX ${i}");
                 for(int pos = 0; pos < HEIGHT; pos++)
@@ -38,7 +41,7 @@ public class PicrossSolver
 
         for(int j = 0; j < HEIGHT; j++)
         {
-            if(_picross.GetRowHintsFromBoardArray(j).Exists(x => x == 0 || x == 10))
+            if(_picross.GetRowHintsFromBoardArray(j).Exists(x => x == 0 || x == _picross.Size[1]))
             {
                 for(int pos = 0; pos < LENGTH; pos++)
                 {
@@ -46,6 +49,11 @@ public class PicrossSolver
                 }
             }
         }
+    }
+
+    public void HandleHintSumCase()
+    {
+
     }
 
     public void GetAllHints()
