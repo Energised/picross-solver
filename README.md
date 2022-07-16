@@ -21,8 +21,6 @@ When I need to find what Key that value is living at, then it becomes harder
 -----
 
 - Since we're always assuming one printed space is a single digit, we end up with issues when
-trying to print the double digit values
+trying to print the double digit values:
 
------
-
-Now I've renamed things to Rows and Columns I've messed up how the game board is printing, how can fix?
+I know I need to allocate space for the hints on each side by length of the hints together as a string rather than by the number of hints
