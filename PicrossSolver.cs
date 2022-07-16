@@ -26,26 +26,23 @@ public class PicrossSolver
 
         for(int i = 0; i < LENGTH; i++)
         {
-            // TODO: need to use these helper methods to decide which character to put on screen
-            // if(_picross.GetColumnHintsFromBoardArray(i).Exists(x => x == 0 || x == _picross.Size[0]))
             if(_picross.IsHintAtColumnPositionAGivenValue(i, 0) || _picross.IsHintAtColumnPositionAGivenValue(i, _picross.Size[0]))
             {
                 Console.WriteLine($"MATCH FOUND AT COLUMN INDEX ${i}");
                 for(int pos = 0; pos < HEIGHT; pos++)
                 {
-                    // we want it at row pos, where i is the column we need to fill
-                    _picross.BoardArray[pos][i] = "O";
+                    _picross.InsertIntoBoardArray(pos, i, "O");
                 }
             }
         }
 
         for(int j = 0; j < HEIGHT; j++)
         {
-            if(_picross.GetRowHintsFromBoardArray(j).Exists(x => x == 0 || x == _picross.Size[1]))
+            if(_picross.IsHintAtRowPositionAGivenValue(j, 0) || _picross.IsHintAtRowPositionAGivenValue(j, _picross.Size[1]))
             {
                 for(int pos = 0; pos < LENGTH; pos++)
                 {
-                    _picross.BoardArray[j][pos] = "O";
+                    _picross.InsertIntoBoardArray(j, pos, "O");
                 }
             }
         }

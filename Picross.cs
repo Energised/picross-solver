@@ -73,6 +73,8 @@ public class Picross
 
     #endregion
 
+    #region Fill Squares
+
     public int InsertIntoBoardArray(int row, int column, string token)
     {
         if(this.BoardArray[row][column].Contains("O") || this.BoardArray[row][column].Contains("X")){
@@ -81,4 +83,6 @@ public class Picross
         this.BoardArray[row][column] = token;
         return 1;
     }
+
+    #endregion
 }
