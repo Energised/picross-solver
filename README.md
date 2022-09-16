@@ -1,4 +1,4 @@
-# Picross Solver
+# Picross App
 
 ## TODO
 

@@ -1,4 +1,10 @@
-namespace PicrossSolver;
+using PicrossApp.Models;
+using PicrossApp.Data.Repositories;
+
+using PicrossApp.Features.DisplayPicross;
+using PicrossApp.Features.SolvePicross;
+
+namespace PicrossApp;
 
 public class Program
 {
